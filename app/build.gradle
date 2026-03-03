@@ -30,6 +30,13 @@ android {
     }
 }
 
+task syncUbuntuBootstrap(type: Copy) {
+    from "$rootDir/custom_env/include/bootstrap/ubuntu"
+    into "$projectDir/src/main/assets/env/include/bootstrap/ubuntu"
+}
+
+preBuild.dependsOn syncUbuntuBootstrap
+
 dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
