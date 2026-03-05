@@ -35,7 +35,12 @@ task syncUbuntuBootstrap(type: Copy) {
     into "$projectDir/src/main/assets/env/include/bootstrap/ubuntu"
 }
 
-preBuild.dependsOn syncUbuntuBootstrap
+task syncUbuntuDebootstrapScripts(type: Copy) {
+    from "$rootDir/custom_env/include/bootstrap/debian/debootstrap/scripts"
+    into "$projectDir/src/main/assets/env/include/bootstrap/debian/debootstrap/scripts"
+}
+
+preBuild.dependsOn syncUbuntuBootstrap, syncUbuntuDebootstrapScripts
 
 dependencies {
     implementation 'com.google.android.material:material:1.1.0'

@@ -5,16 +5,24 @@ The application creates a disk image or a directory on a flash card or uses a pa
 The program supports multi language interface. You can manage the process of installing the OS, and after installation, you can start and stop services of the new system (there is support for running your scripts) through the UI. The installation process is reported as text in the main application window. During the installation, the program will adjust the environment, which includes the base system, SSH server, VNC server and desktop environment. The program interface can also manage SSH and VNC settings.
 ## Ubuntu Support (2025 Update)
 
-This fork adds support for modern Ubuntu LTS releases with improved deployment logic:
+This fork adds support for modern Ubuntu releases with improved deployment logic:
 
 ### Supported Versions
 
+- ✅ **Ubuntu 25.10 (Questing Quokka)**
+  - Latest stable Ubuntu release
+  - ARM64 and AMD64 architectures are recommended
+
+- ✅ **Ubuntu 25.04 (Plucky Puffin)**
+  - Recent Ubuntu release
+  - ARM64 and AMD64 architectures are recommended
+
 - ✅ **Ubuntu 24.04 LTS (Noble Numbat)** - Supported until 2029
+  - **Default version** - Recommended for new installations
   - ARM64 and AMD64 architectures only (i386 not supported)
   - Latest features and packages
   
 - ✅ **Ubuntu 22.04 LTS (Jammy Jellyfish)** - Supported until 2027
-  - **Default version** - Recommended for new installations
   - Full architecture support: armhf, arm64, i386, amd64
   - Excellent stability and security updates
   
@@ -41,6 +49,8 @@ This fork adds support for modern Ubuntu LTS releases with improved deployment l
 
 | Ubuntu Version | armhf | arm64 | i386 | amd64 | armel |
 |---------------|-------|-------|------|-------|-------|
+| Questing (25.10) | ✅ | ✅ | ❌ | ✅ | ❌ |
+| Plucky (25.04) | ✅ | ✅ | ❌ | ✅ | ❌ |
 | Noble (24.04) | ✅    | ✅    | ❌   | ✅    | ❌    |
 | Jammy (22.04) | ✅    | ✅    | ✅   | ✅    | ❌    |
 | Focal (20.04) | ✅    | ✅    | ✅   | ✅    | ❌    |
@@ -59,12 +69,15 @@ This fork includes customized deployment scripts in the `custom_env/` directory.
 # Apply custom Ubuntu deployment scripts
 mkdir -p app/src/main/assets/env/include/bootstrap/ubuntu/
 cp custom_env/include/bootstrap/ubuntu/* app/src/main/assets/env/include/bootstrap/ubuntu/
+mkdir -p app/src/main/assets/env/include/bootstrap/debian/debootstrap/scripts/
+cp custom_env/include/bootstrap/debian/debootstrap/scripts/* app/src/main/assets/env/include/bootstrap/debian/debootstrap/scripts/
 ```
 
 Alternatively, you can use rsync for more reliable synchronization:
 
 ```bash
 rsync -av custom_env/include/bootstrap/ubuntu/ app/src/main/assets/env/include/bootstrap/ubuntu/
+rsync -av custom_env/include/bootstrap/debian/debootstrap/scripts/ app/src/main/assets/env/include/bootstrap/debian/debootstrap/scripts/
 ```
 
 See `custom_env/README.md` for details about the customizations.
